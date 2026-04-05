@@ -79,6 +79,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--dark-navy) !important;
   margin: 0 10px;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 .nav-link:hover, .nav-link.active {
   color: var(--primary-green) !important;
