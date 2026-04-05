@@ -77,9 +77,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font);
   font-weight: 500;
   color: var(--dark-navy) !important;
-  margin: 0 10px;
+  margin: 0 6px;
   transition: color 0.3s;
   white-space: nowrap;
+}
+
+.navbar-nav {
+  flex-wrap: nowrap;
 }
 .nav-link:hover, .nav-link.active {
   color: var(--primary-green) !important;
