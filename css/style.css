@@ -73,6 +73,12 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-brand span {
   color: var(--dark-navy);
 }
+
+.logo-img {
+  height: 55px;
+  width: auto;
+}
+
 .nav-link {
   font-family: var(--heading-font);
   font-weight: 500;
