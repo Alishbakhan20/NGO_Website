@@ -73,6 +73,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.7rem;
 
   border: none !important; 
+  box-shadow: none !important;
+
 }
 .navbar-brand span {
   color: var(--dark-navy);
@@ -95,6 +97,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-nav {
   flex-wrap: nowrap;
+  gap: 10px;
 }
 .nav-link:hover, .nav-link.active {
   color: var(--primary-green) !important;
