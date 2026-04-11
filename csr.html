@@ -114,16 +114,20 @@
                 <div class="col-lg-8">
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
-                            <form id="csrForm">
-                                <input type="hidden" name="formType" value="csr">
+
+                            <form id="csrForm"
+                                  action="https://docs.google.com/forms/d/e/1FAIpQLScDJdL-8UeVrkD3EgTvU6-vG3i-BP95dWiNg7ErnDgndaHGEg/formResponse"
+                                  method="POST"
+                                  target="hidden_iframe">
+
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="orgName" class="form-label fw-bold">Organization Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="orgName" name="orgName" required>
+                                        <input type="text" class="form-control" id="orgName" name="entry.409857617" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="orgType" class="form-label fw-bold">Organization Type <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="orgType" name="orgType" required>
+                                        <select class="form-select" id="orgType" name="entry.1136134654" required>
                                             <option value="" disabled selected>Select type...</option>
                                             <option value="Company">Company</option>
                                             <option value="NGO">NGO</option>
@@ -132,27 +136,27 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactPerson" class="form-label fw-bold">Contact Person Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="contactPerson" name="contactPerson" required>
+                                        <input type="text" class="form-control" id="contactPerson" name="entry.1330097241" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="designation" class="form-label fw-bold">Designation <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="designation" name="designation" required>
+                                        <input type="text" class="form-control" id="designation" name="entry.1741834280" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactEmail" class="form-label fw-bold">Email Address <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                                        <input type="email" class="form-control" id="contactEmail" name="entry.1683260662" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactPhone" class="form-label fw-bold">Phone Number <span class="text-danger">*</span></label>
-                                        <input type="tel" class="form-control" id="contactPhone" name="contactPhone" required>
+                                        <input type="tel" class="form-control" id="contactPhone" name="entry.1000780141" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="cityState" class="form-label fw-bold">City & State <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="cityState" name="cityState" placeholder="e.g. Pune, Maharashtra" required>
+                                        <input type="text" class="form-control" id="cityState" name="entry.49575216" placeholder="e.g. Pune, Maharashtra" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="interestArea" class="form-label fw-bold">Area of Interest <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="interestArea" name="interestArea" required>
+                                        <select class="form-select" id="interestArea" name="entry.1397438536" required>
                                             <option value="" disabled selected>Select an area...</option>
                                             <option value="Education">Education</option>
                                             <option value="Health">Health</option>
@@ -165,13 +169,31 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="briefDescription" class="form-label fw-bold">Brief Description of Project/Goal <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="briefDescription" name="briefDescription" rows="4" placeholder="Tell us what kind of collaboration or project you're aiming for..." required></textarea>
+                                        <textarea class="form-control" id="briefDescription" name="entry.699678757" rows="4" placeholder="Tell us what kind of collaboration or project you're aiming for..." required></textarea>
                                     </div>
                                     <div class="col-12 text-center mt-4">
                                         <button type="submit" class="btn btn-primary-custom btn-lg w-100">Submit Proposal</button>
                                     </div>
                                 </div>
                             </form>
+
+                            <!-- Hidden iframe: catches Google's redirect so page stays put -->
+                            <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+                            <!-- Success message shown after submit -->
+                            <div id="csrSuccess" style="display:none;" class="alert alert-success text-center mt-4 rounded-3 fs-5">
+                                ✅ <strong>Proposal Submitted!</strong> Our team will contact you within 2–3 business days.
+                            </div>
+
+                            <script>
+                                document.getElementById('csrForm').addEventListener('submit', function () {
+                                    setTimeout(function () {
+                                        document.getElementById('csrForm').style.display = 'none';
+                                        document.getElementById('csrSuccess').style.display = 'block';
+                                    }, 1000);
+                                });
+                            </script>
+
                         </div>
                     </div>
                 </div>
