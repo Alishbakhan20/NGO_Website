@@ -8,6 +8,7 @@
   --body-font: 'Open Sans', sans-serif;
 }
 
+/* ================= GLOBAL ================= */
 html {
   scroll-behavior: smooth;
 }
@@ -35,6 +36,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 30px;
   transition: all 0.3s ease;
 }
+
 .btn-primary-custom:hover {
   background-color: #32963d;
   transform: translateY(-2px);
@@ -50,6 +52,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 30px;
   transition: all 0.3s ease;
 }
+
 .btn-secondary-custom:hover {
   background-color: #1574a8;
   transform: translateY(-2px);
@@ -82,9 +85,9 @@ h1, h2, h3, h4, h5, h6 {
 .logo-img {
   height: 50px;
   width: auto;
-  margin-right: 8px;
 }
 
+/* Navigation Links */
 .nav-link {
   font-family: var(--heading-font);
   font-weight: 500;
@@ -99,14 +102,15 @@ h1, h2, h3, h4, h5, h6 {
   gap: 10px;
 }
 
-.nav-link:hover, 
+.nav-link:hover,
 .nav-link.active {
   color: var(--primary-green) !important;
 }
 
 /* ================= HERO ================= */
 .hero-section {
-  background: linear-gradient(rgba(28, 45, 94, 0.8), rgba(28, 45, 94, 0.8)), url('../images/Herobg.png') no-repeat center center/cover;
+  background: linear-gradient(rgba(28, 45, 94, 0.8), rgba(28, 45, 94, 0.8)),
+              url('../images/Herobg.png') no-repeat center center/cover;
   padding: 160px 0 120px;
   color: #fff;
   text-align: center;
@@ -175,12 +179,12 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
-/* Light overlay */
+/* Overlay (light professional look) */
 .card-img-container::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* ================= FOOTER ================= */
