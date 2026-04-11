@@ -58,6 +58,7 @@
                 </div>
             </div>
             <div class="row g-4 mt-5">
+                <!-- Companies -->
                 <div class="col-lg-4 col-md-6">
                     <div class="card custom-card p-4 border-top border-4 border-success text-start">
                         <div class="icon-box mb-3"><i class="fa-regular fa-building"></i></div>
@@ -69,6 +70,7 @@
                         </ul>
                     </div>
                 </div>
+                <!-- NGOs -->
                 <div class="col-lg-4 col-md-6">
                     <div class="card custom-card p-4 border-top border-4 border-primary text-start">
                         <div class="icon-box blue mb-3"><i class="fa-solid fa-people-group"></i></div>
@@ -80,6 +82,7 @@
                         </ul>
                     </div>
                 </div>
+                <!-- Colleges -->
                 <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
                     <div class="card custom-card p-4 border-top border-4 text-start" style="border-color: var(--accent-tan) !important;">
                         <div class="icon-box tan mb-3"><i class="fa-solid fa-graduation-cap"></i></div>
@@ -107,26 +110,21 @@
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
 
-                            <!-- SUCCESS MESSAGE: shown after form submits -->
+                            <!-- Success Message -->
                             <div id="csrSuccess" style="display:none;" class="alert alert-success text-center rounded-3 fs-5 mb-4">
                                 ✅ <strong>Proposal Submitted!</strong> Our team will contact you within 2–3 business days.
                             </div>
 
-                            <!-- FORM: submits directly to Google Forms, no JS needed -->
-                            <form id="csrForm"
-                                  action="https://docs.google.com/forms/d/e/1FAIpQLScDJdL-8UeVrkD3EgTvU6-vG3i-BP95dWiNg7ErnDgndaHGEg/formResponse"
-                                  method="POST"
-                                  target="hidden_iframe"
-                                  onsubmit="handleCSRSubmit()">
-
+                            <!-- CSR Form -->
+                            <form id="csrForm">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="orgName" class="form-label fw-bold">Organization Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="orgName" name="entry.409857617" required>
+                                        <input type="text" class="form-control" id="orgName" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="orgType" class="form-label fw-bold">Organization Type <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="orgType" name="entry.1136134654" required>
+                                        <select class="form-select" id="orgType" required>
                                             <option value="" disabled selected>Select type...</option>
                                             <option value="Company">Company</option>
                                             <option value="NGO">NGO</option>
@@ -135,27 +133,27 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactPerson" class="form-label fw-bold">Contact Person Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="contactPerson" name="entry.1330097241" required>
+                                        <input type="text" class="form-control" id="contactPerson" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="designation" class="form-label fw-bold">Designation <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="designation" name="entry.1741834280" required>
+                                        <input type="text" class="form-control" id="designation" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactEmail" class="form-label fw-bold">Email Address <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="contactEmail" name="entry.1683260662" required>
+                                        <input type="email" class="form-control" id="contactEmail" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactPhone" class="form-label fw-bold">Phone Number <span class="text-danger">*</span></label>
-                                        <input type="tel" class="form-control" id="contactPhone" name="entry.1000780141" required>
+                                        <input type="tel" class="form-control" id="contactPhone" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="cityState" class="form-label fw-bold">City & State <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="cityState" name="entry.49575216" placeholder="e.g. Pune, Maharashtra" required>
+                                        <input type="text" class="form-control" id="cityState" placeholder="e.g. Pune, Maharashtra" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="interestArea" class="form-label fw-bold">Area of Interest <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="interestArea" name="entry.1397438536" required>
+                                        <select class="form-select" id="interestArea" required>
                                             <option value="" disabled selected>Select an area...</option>
                                             <option value="Education">Education</option>
                                             <option value="Health">Health</option>
@@ -168,16 +166,13 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="briefDescription" class="form-label fw-bold">Brief Description of Project/Goal <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="briefDescription" name="entry.699678757" rows="4" placeholder="Tell us what kind of collaboration or project you're aiming for..." required></textarea>
+                                        <textarea class="form-control" id="briefDescription" rows="4" placeholder="Tell us what kind of collaboration or project you're aiming for..." required></textarea>
                                     </div>
                                     <div class="col-12 text-center mt-4">
-                                        <button type="submit" class="btn btn-primary-custom btn-lg w-100">Submit Proposal</button>
+                                        <button type="submit" id="csrSubmitBtn" class="btn btn-primary-custom btn-lg w-100">Submit Proposal</button>
                                     </div>
                                 </div>
                             </form>
-
-                            <!-- Hidden iframe catches Google redirect silently -->
-                            <iframe name="hidden_iframe" style="display:none;"></iframe>
 
                         </div>
                     </div>
@@ -238,14 +233,55 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // This runs on submit — shows success, hides form
-        // The form itself still posts to Google via the action= URL
-        function handleCSRSubmit() {
-            setTimeout(function () {
+        // Google Form endpoint
+        const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScDJdL-8UeVrkD3EgTvU6-vG3i-BP95dWiNg7ErnDgndaHGEg/formResponse';
+
+        // Entry IDs mapped to each field
+        const FIELD_MAP = {
+            orgName:          'entry.409857617',
+            orgType:          'entry.1136134654',
+            contactPerson:    'entry.1330097241',
+            designation:      'entry.1741834280',
+            contactEmail:     'entry.1683260662',
+            contactPhone:     'entry.1000780141',
+            cityState:        'entry.49575216',
+            interestArea:     'entry.1397438536',
+            briefDescription: 'entry.699678757'
+        };
+
+        document.getElementById('csrForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('csrSubmitBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+
+            // Build URL-encoded form data
+            const params = new URLSearchParams();
+            for (const [fieldId, entryKey] of Object.entries(FIELD_MAP)) {
+                params.append(entryKey, document.getElementById(fieldId).value);
+            }
+
+            // Send to Google Forms using no-cors (always succeeds without CORS error)
+            fetch(GOOGLE_FORM_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            })
+            .then(function () {
+                // no-cors fetch always resolves — data sent successfully
                 document.getElementById('csrForm').style.display = 'none';
                 document.getElementById('csrSuccess').style.display = 'block';
-            }, 800);
-        }
+                window.scrollTo({ top: document.getElementById('csrSuccess').offsetTop - 100, behavior: 'smooth' });
+            })
+            .catch(function (err) {
+                btn.innerHTML = 'Submit Proposal';
+                btn.disabled = false;
+                alert('Something went wrong. Please try again.');
+                console.error(err);
+            });
+        });
     </script>
 </body>
 </html>
