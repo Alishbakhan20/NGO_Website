@@ -373,3 +373,22 @@ footer a:hover {
 .hero-content a {
   margin: 10px;
 }
+
+.hero-section h1 {
+  font-size: 3.8rem;
+  font-weight: 800;
+}
+
+/* ===== ADD THIS BELOW EVERYTHING ===== */
+.hero-video {
+  animation: zoomEffect 20s infinite alternate;
+}
+
+@keyframes zoomEffect {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
