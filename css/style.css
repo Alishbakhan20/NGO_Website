@@ -355,11 +355,21 @@ footer a:hover {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(28, 45, 94, 0.75);
+  background: rgba(28, 45, 94, 0.55);
   z-index: 2;
 }
 
 .hero-content {
   position: relative;
   z-index: 3;
+}
+.hero-overlay {
+  background: linear-gradient(
+    rgba(28, 45, 94, 0.6),
+    rgba(28, 45, 94, 0.4)
+  );
+}
+
+.hero-content a {
+  margin: 10px;
 }
