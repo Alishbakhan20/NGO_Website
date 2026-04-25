@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+ 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
@@ -28,16 +28,17 @@
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="causes.html">NGO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="causes.html">Causes</a></li>
                     <li class="nav-item"><a class="nav-link active" href="internship.html">Internship</a></li>
+                    <li class="nav-item"><a class="nav-link" href="donate.html">Donate</a></li>
                     <li class="nav-item"><a class="nav-link" href="csr.html">CSR</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                 </ul>
-                <a href="donate.html" class="btn btn-primary-custom">Donate Now</a>
+                <a href="#applyFormSection" class="btn btn-primary-custom">Apply Now</a>
             </div>
         </div>
     </nav>
-
+ 
     <!-- Page Header -->
     <div class="page-header">
         <div class="container">
@@ -50,7 +51,7 @@
             </nav>
         </div>
     </div>
-
+ 
     <!-- Overview Section -->
     <section class="section-padding pt-0">
         <div class="container">
@@ -78,7 +79,7 @@
             </div>
         </div>
     </section>
-
+ 
     <!-- Domains Section -->
     <section class="section-padding bg-light">
         <div class="container">
@@ -160,7 +161,7 @@
                     </div>
                 </div>
             </div>
-
+ 
             <!-- Roles / Responsibilities -->
             <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border">
                 <h4 class="fw-bold mb-4">Roles & Responsibilities</h4>
@@ -183,7 +184,7 @@
             </div>
         </div>
     </section>
-
+ 
     <!-- Application Form -->
     <section class="section-padding" id="applyFormSection">
         <div class="container">
@@ -195,12 +196,12 @@
                 <div class="col-lg-8">
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
-
+ 
                             <!-- Success Message -->
                             <div id="internshipSuccess" style="display:none;" class="alert alert-success text-center rounded-3 fs-5 mb-4">
                                 ✅ <strong>Application Submitted!</strong> We will review your application and contact you soon.
                             </div>
-
+ 
                             <!-- Internship Form -->
                             <form id="internshipForm">
                                 <div class="row g-3">
@@ -256,14 +257,14 @@
                                     </div>
                                 </div>
                             </form>
-
+ 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+ 
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -284,7 +285,7 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="causes.html">NGO</a></li>
+                        <li><a href="causes.html">Causes</a></li>
                         <li><a href="internship.html">Internship</a></li>
                     </ul>
                 </div>
@@ -310,16 +311,16 @@
             </div>
         </div>
     </footer>
-
+ 
     <!-- Bootstrap & JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-
+ 
         // Google Form endpoint for Internship
         const INTERNSHIP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf90FWNEGYmwl80cWxdNcmGIaXwvDIYhTMlsl7kRy8nXAcjqA/formResponse';
-
+ 
         // Entry IDs mapped to each field ID
         const INTERNSHIP_FIELDS = {
             fullName:   'entry.22950705',
@@ -331,20 +332,20 @@
             resumeLink: 'entry.1343668667',
             whyJoin:    'entry.866700930'
         };
-
+ 
         document.getElementById('internshipForm').addEventListener('submit', function (e) {
             e.preventDefault();
-
+ 
             const btn = document.getElementById('internshipSubmitBtn');
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
             btn.disabled = true;
-
+ 
             // Build URL-encoded form data
             const params = new URLSearchParams();
             for (const [fieldId, entryKey] of Object.entries(INTERNSHIP_FIELDS)) {
                 params.append(entryKey, document.getElementById(fieldId).value);
             }
-
+ 
             // Send to Google Forms using no-cors
             fetch(INTERNSHIP_FORM_URL, {
                 method: 'POST',
@@ -367,3 +368,4 @@
     </script>
 </body>
 </html>
+ 
