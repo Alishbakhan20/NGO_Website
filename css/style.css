@@ -394,10 +394,11 @@ footer a:hover {
 
 .qr-container {
   background: #ffffff;
-  padding: 25px;
+  padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  display: inline-block;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  margin: 0 auto;
+  display: block;
   text-align: center;
 }
 
@@ -406,11 +407,6 @@ footer a:hover {
   max-width: 100%;
   border-radius: 12px;
   margin-bottom: 15px;
-}
-
-.qr-container {
-  margin: 0 auto;
-  display: block;
 }
 
 .qr-text {
