@@ -390,3 +390,26 @@ footer a:hover {
   );
   z-index: 2;
 }
+/* ===== QR DONATION SECTION ===== */
+
+.qr-container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  display: inline-block;
+  text-align: center;
+}
+
+.qr-img {
+  width: 260px;
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.qr-text {
+  font-weight: 600;
+  color: var(--dark-navy);
+  font-size: 1rem;
+}
