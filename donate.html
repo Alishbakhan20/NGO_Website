@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+ 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-    <img src="images/logo2.png" alt="AVABODH Logo" class="logo-img">
-</a>
+                <img src="images/logo2.png" alt="AVABODH Logo" class="logo-img">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,7 +37,7 @@
             </div>
         </div>
     </nav>
-
+ 
     <!-- Page Header -->
     <div class="page-header">
         <div class="container">
@@ -50,7 +50,7 @@
             </nav>
         </div>
     </div>
-
+ 
     <!-- Impact & Donation details Section -->
     <section class="section-padding pt-0">
         <div class="container">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <!-- UPI & QR Code side -->
                 <div class="col-lg-5 offset-lg-1 text-center">
                     <div class="card border-0 shadow rounded-4 p-4 p-md-5 bg-light">
@@ -104,7 +104,7 @@
             </div>
         </div>
     </section>
-
+ 
     <!-- Donation Feedback Form -->
     <section class="section-padding bg-light">
         <div class="container">
@@ -116,28 +116,34 @@
                 <div class="col-lg-8">
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
+ 
+                            <!-- Success Message -->
+                            <div id="donateSuccess" style="display:none;" class="alert alert-success text-center rounded-3 fs-5 mb-4">
+                                ✅ <strong>Thank you for your donation!</strong> We will send a confirmation to your email shortly.
+                            </div>
+ 
+                            <!-- Donation Form -->
                             <form id="donateForm">
-                                <input type="hidden" name="formType" value="donation">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="donorName" class="form-label fw-bold">Full Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="donorName" name="donorName" required>
+                                        <input type="text" class="form-control" id="donorName" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="donorEmail" class="form-label fw-bold">Email Address <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="donorEmail" name="donorEmail" required>
+                                        <input type="email" class="form-control" id="donorEmail" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="donorPhone" class="form-label fw-bold">Phone Number <span class="text-danger">*</span></label>
-                                        <input type="tel" class="form-control" id="donorPhone" name="donorPhone" required>
+                                        <input type="tel" class="form-control" id="donorPhone" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="donationAmount" class="form-label fw-bold">Donation Amount (₹) <span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="donationAmount" name="donationAmount" min="1" required>
+                                        <input type="number" class="form-control" id="donationAmount" min="1" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="paymentMode" class="form-label fw-bold">Payment Mode <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="paymentMode" name="paymentMode" required>
+                                        <select class="form-select" id="paymentMode" required>
                                             <option value="" disabled selected>Select payment mode...</option>
                                             <option value="UPI">UPI</option>
                                             <option value="Bank Transfer">Bank Transfer</option>
@@ -147,24 +153,25 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="transactionId" class="form-label fw-bold">Transaction ID / UTR <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="transactionId" name="transactionId" required>
+                                        <input type="text" class="form-control" id="transactionId" required>
                                     </div>
                                     <div class="col-12">
                                         <label for="donorMessage" class="form-label fw-bold">Message (Optional)</label>
-                                        <textarea class="form-control" id="donorMessage" name="donorMessage" rows="3" placeholder="Leave a message or dedicate this donation..."></textarea>
+                                        <textarea class="form-control" id="donorMessage" rows="3" placeholder="Leave a message or dedicate this donation..."></textarea>
                                     </div>
                                     <div class="col-12 text-center mt-4">
-                                        <button type="submit" class="btn btn-primary-custom btn-lg w-100">Submit Details</button>
+                                        <button type="submit" id="donateSubmitBtn" class="btn btn-primary-custom btn-lg w-100">Submit Details</button>
                                     </div>
                                 </div>
                             </form>
+ 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+ 
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -211,12 +218,60 @@
             </div>
         </div>
     </footer>
-
+ 
     <!-- Bootstrap & JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+ 
+        // Google Form endpoint for Donations
+        const DONATE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfhrE0yZli8e0lgqayu1cELieCP571FAntywDF8PiflLSeViw/formResponse';
+ 
+        // Entry IDs mapped to each field ID
+        const DONATE_FIELDS = {
+            donorName:      'entry.673800278',
+            donorEmail:     'entry.44367257',
+            donorPhone:     'entry.627358676',
+            donationAmount: 'entry.1379355768',
+            paymentMode:    'entry.40411047',
+            transactionId:  'entry.625383032',
+            donorMessage:   'entry.1963851223'
+        };
+ 
+        document.getElementById('donateForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+ 
+            const btn = document.getElementById('donateSubmitBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+ 
+            // Build URL-encoded form data
+            const params = new URLSearchParams();
+            for (const [fieldId, entryKey] of Object.entries(DONATE_FIELDS)) {
+                params.append(entryKey, document.getElementById(fieldId).value);
+            }
+ 
+            // Send to Google Forms using no-cors
+            fetch(DONATE_FORM_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            })
+            .then(function () {
+                document.getElementById('donateForm').style.display = 'none';
+                document.getElementById('donateSuccess').style.display = 'block';
+                window.scrollTo({ top: document.getElementById('donateSuccess').offsetTop - 100, behavior: 'smooth' });
+            })
+            .catch(function (err) {
+                btn.innerHTML = 'Submit Details';
+                btn.disabled = false;
+                alert('Something went wrong. Please try again.');
+                console.error(err);
+            });
+        });
     </script>
 </body>
 </html>
+ 
