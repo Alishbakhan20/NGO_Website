@@ -1,12 +1,17 @@
-const SCRIPT_URL = '';
+// ============================================================
+// AVABODH Foundation — main.js
+// All 5 forms (CSR, Internship, Donate, Contact, NGO) submit
+// directly to Google Forms via fetch + no-cors in their own
+// ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // -----------------------------------------------
-  // Animated Stats Counter
+  // Animated Stats Counter (used on index.html)
   // -----------------------------------------------
   const stats = document.querySelectorAll('.stat-counter');
   let hasAnimated = false;
+
   if (stats.length > 0) {
     const animateStats = () => {
       stats.forEach(stat => {
@@ -27,71 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       hasAnimated = true;
     };
+
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !hasAnimated) {
         animateStats();
       }
     }, { threshold: 0.5 });
+
     const statsSection = document.querySelector('.stats-section');
     if (statsSection) {
       observer.observe(statsSection);
     }
   }
-
-  // -----------------------------------------------
-  // Generic Form Handler (Apps Script method)
-  // NOTE: csrForm is NOT included here.
-  // csrForm submits directly to Google Forms via
-  // action= attribute in csr.html — no JS needed.
-  // -----------------------------------------------
-  function setupForm(formId) {
-    const form = document.getElementById(formId);
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      if (!SCRIPT_URL) {
-        alert("DEVELOPER WARNING: Please set the SCRIPT_URL in js/main.js to your actual Google Apps Script Web App URL to enable form data saving.");
-        return;
-      }
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-      submitBtn.disabled = true;
-
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: formData
-        });
-        const result = await response.json();
-
-        if (result.result === 'success') {
-          let msg = "Thank you! Your submission has been received.";
-          if (formId === 'internshipForm') msg = "Thank you! Your application has been received. We will contact you soon.";
-          else if (formId === 'donateForm') msg = "Thank you for your generous donation! We will send a confirmation to your email shortly.";
-
-          alert(msg);
-          form.reset();
-        } else {
-          alert("There was an error processing your request on the server. Please try again.");
-        }
-      } catch (error) {
-        console.error('Error!', error.message);
-        alert("Network error. Please try again later or check your connection.");
-      } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }
-    });
-  }
-
-  // csrForm intentionally excluded — handled by Google Forms direct POST in csr.html
-  setupForm('internshipForm');
-  setupForm('donateForm');
 
 });
