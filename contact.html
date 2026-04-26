@@ -19,8 +19,8 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-    <img src="images/logo2.png" alt="AVABODH Logo" class="logo-img">
-</a>
+                <img src="images/logo2.png" alt="AVABODH Logo" class="logo-img">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -105,30 +105,37 @@
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
                             <h4 class="fw-bold mb-4">Send us a Message</h4>
+
+                            <!-- Success Message -->
+                            <div id="contactSuccess" style="display:none;" class="alert alert-success text-center rounded-3 fs-5 mb-4">
+                                ✅ <strong>Message Sent!</strong> We'll get back to you as soon as possible.
+                            </div>
+
+                            <!-- Contact Form -->
                             <form id="contactForm">
-                                <input type="hidden" name="formType" value="contact">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="contactName" class="form-label fw-bold">Your Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="contactName" name="contactName" required>
+                                        <input type="text" class="form-control" id="contactName" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="contactEmail" class="form-label fw-bold">Your Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
+                                        <input type="email" class="form-control" id="contactEmail" required>
                                     </div>
                                     <div class="col-12">
                                         <label for="contactSubject" class="form-label fw-bold">Subject <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="contactSubject" name="contactSubject" required>
+                                        <input type="text" class="form-control" id="contactSubject" required>
                                     </div>
                                     <div class="col-12">
                                         <label for="contactMessage" class="form-label fw-bold">Message <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="contactMessage" name="contactMessage" rows="5" required></textarea>
+                                        <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
                                     </div>
                                     <div class="col-12 mt-4">
-                                        <button type="submit" class="btn btn-primary-custom btn-lg w-100">Send Message</button>
+                                        <button type="submit" id="contactSubmitBtn" class="btn btn-primary-custom btn-lg w-100">Send Message</button>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -136,9 +143,8 @@
         </div>
     </section>
 
-    <!-- Google Map Container -->
+    <!-- Google Map -->
     <div class="container-fluid px-0">
-        <!-- Placeholder iframe for Medical Square, Nagpur -->
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14886.726590215915!2d79.08479535!3d21.1252627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c060714ed4a3%3A0xe5a1b32ee84fbced!2sMedical%20Square%2C%20Nagpur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1711222333444!5m2!1sen!2sin" width="100%" height="450" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
@@ -194,6 +200,50 @@
     <script src="js/main.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Google Form endpoint for Contact
+        const CONTACT_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeP9e1db382H93DIydtF2xHwC4gYN_WCWtAG2tKI7mw8OFNDg/formResponse';
+
+        // Entry IDs mapped to each field
+        const CONTACT_FIELDS = {
+            contactName:    'entry.385067241',
+            contactEmail:   'entry.1867460133',
+            contactSubject: 'entry.1533858834',
+            contactMessage: 'entry.688347189'
+        };
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('contactSubmitBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            // Build URL-encoded form data
+            const params = new URLSearchParams();
+            for (const [fieldId, entryKey] of Object.entries(CONTACT_FIELDS)) {
+                params.append(entryKey, document.getElementById(fieldId).value);
+            }
+
+            // Send to Google Forms using no-cors
+            fetch(CONTACT_FORM_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            })
+            .then(function () {
+                document.getElementById('contactForm').style.display = 'none';
+                document.getElementById('contactSuccess').style.display = 'block';
+                window.scrollTo({ top: document.getElementById('contactSuccess').offsetTop - 100, behavior: 'smooth' });
+            })
+            .catch(function (err) {
+                btn.innerHTML = 'Send Message';
+                btn.disabled = false;
+                alert('Something went wrong. Please try again.');
+                console.error(err);
+            });
+        });
     </script>
 </body>
 </html>
